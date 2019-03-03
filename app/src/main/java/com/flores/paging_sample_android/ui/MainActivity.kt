@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.paging.DataSource
+import androidx.paging.PagedList
 import com.flores.paging_sample_android.R
 import com.flores.paging_sample_android.data.local.DataBase
 import com.flores.paging_sample_android.data.local.dao.MovieDao
@@ -24,12 +25,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         pagingViewModel = ViewModelProviders.of(this).get(PagingViewModel::class.java)
-        pagingViewModel.concertList.observe(this, Observer { pageList ->
-
+        pagingViewModel.concertList.observe(this, Observer { movieList ->
+            showData(movieList)
         })
     }
 
-    fun insertData() {
+    fun showData(movieList: PagedList<Movie>) {
 
     }
 
