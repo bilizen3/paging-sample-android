@@ -9,7 +9,13 @@ import com.flores.paging_sample_android.repository.PagingRepository
 
 class PagingViewModel(pagingRepository: PagingRepository) : ViewModel() {
 
+    private val pagedListConfig = PagedList.Config.Builder()
+        .setEnablePlaceholders(true)
+        .setInitialLoadSizeHint(5)
+        .setPageSize(10)
+        .build()
+
     val concertList : LiveData<PagedList<Movie>> =
-        LivePagedListBuilder(pagingRepository.allMovies(),10).build()
+        LivePagedListBuilder(pagingRepository.allMovies(),pagedListConfig).build()
 
 }

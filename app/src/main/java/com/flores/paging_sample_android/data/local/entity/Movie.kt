@@ -5,7 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 class Movie(
-    @PrimaryKey val id: Long,
+    @PrimaryKey
+    val id: Long,
     val title: String,
     val popularity: Int,
     val voteAverage: Int,
