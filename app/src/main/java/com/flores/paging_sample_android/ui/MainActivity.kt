@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var database: DataBase
     lateinit var pagingRepository: PagingRepository
     lateinit var pagingViewModel: PagingViewModel
-    lateinit var movieAdapter: MovieAdapter
+    var movieAdapter= MovieAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
