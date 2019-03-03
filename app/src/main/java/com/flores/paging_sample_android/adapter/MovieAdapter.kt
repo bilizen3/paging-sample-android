@@ -20,7 +20,6 @@ class MovieAdapter : PagedListAdapter<Movie, MovieAdapter.MovieViewHolder>(diffC
         holder.bind(getItem(position)!!)
     }
 
-
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(movie: Movie) {
             itemView.movieId.text=movie.title

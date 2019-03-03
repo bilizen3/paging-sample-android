@@ -12,6 +12,9 @@ interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(movieList: List<Movie>)
 
-    @Query("SELECT * FROM Movie ORDER BY popularity DESC, title ASC")
+    @Query("SELECT * FROM Movie")
     fun allMovies(): DataSource.Factory<Int, Movie>
+
+    @Query("SELECT COUNT(*) FROM Movie")
+    fun countMovies(): Int
 }
