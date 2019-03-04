@@ -3,7 +3,6 @@ package com.flores.paging_sample_android.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.flores.paging_sample_android.R

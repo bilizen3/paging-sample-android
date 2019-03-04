@@ -8,8 +8,5 @@ class Movie(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val title: String,
-//    val popularity: Int,
-//    val voteAverage: Int,
-//    val posterUrl: String,
     val description: String = ""
 )
