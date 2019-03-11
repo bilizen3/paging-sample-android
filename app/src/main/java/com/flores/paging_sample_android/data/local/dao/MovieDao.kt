@@ -18,3 +18,4 @@ interface MovieDao {
     @Query("SELECT COUNT(*) FROM Movie")
     fun countMovies(): Int
 }
+

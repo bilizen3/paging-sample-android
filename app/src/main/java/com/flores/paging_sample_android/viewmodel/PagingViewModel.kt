@@ -15,7 +15,7 @@ class PagingViewModel(pagingRepository: PagingRepository) : ViewModel() {
         .setPageSize(10)
         .build()
 
-    val concertList : LiveData<PagedList<Movie>> =
-        LivePagedListBuilder(pagingRepository.allMovies(),pagedListConfig).build()
+    val concertList: LiveData<PagedList<Movie>> =
+        LivePagedListBuilder(pagingRepository.allMovies(), pagedListConfig).build()
 
 }

@@ -13,13 +13,12 @@ import com.flores.paging_sample_android.repository.PagingRepository
 import com.flores.paging_sample_android.viewmodel.PagingViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var database: DataBase
     private lateinit var pagingRepository: PagingRepository
     private lateinit var pagingViewModel: PagingViewModel
-    private var movieAdapter= MovieAdapter()
+    private var movieAdapter = MovieAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,22 +26,22 @@ class MainActivity : AppCompatActivity() {
         init()
     }
 
-    private fun init(){
+    private fun init() {
         database = DataBase.getInstance(applicationContext)
         pagingRepository = PagingRepository(database.movieDao())
         pagingViewModel = PagingViewModel(pagingRepository)
         insertData()
         rvMovie.layoutManager = LinearLayoutManager(applicationContext)
-        rvMovie.adapter =movieAdapter
+        rvMovie.adapter = movieAdapter
 
         pagingViewModel.concertList.observe(this, Observer { movieList ->
             showData(movieList)
         })
     }
 
-    private fun insertData(){
-        val movies= mutableListOf<Movie>()
-        for (index in 1..100){
+    private fun insertData() {
+        val movies = mutableListOf<Movie>()
+        for (index in 1..100) {
             movies.add(Movie(title = "nuevo$index"))
         }
         pagingRepository.insertMovie(movies)

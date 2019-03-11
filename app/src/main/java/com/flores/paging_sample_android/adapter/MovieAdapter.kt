@@ -22,7 +22,7 @@ class MovieAdapter : PagedListAdapter<Movie, MovieAdapter.MovieViewHolder>(diffC
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(movie: Movie) {
-            itemView.movieId.text=movie.title
+            itemView.movieId.text = movie.title
         }
     }
 
@@ -35,6 +35,5 @@ class MovieAdapter : PagedListAdapter<Movie, MovieAdapter.MovieViewHolder>(diffC
                 oldItem == newItem
         }
     }
-
 
 }
