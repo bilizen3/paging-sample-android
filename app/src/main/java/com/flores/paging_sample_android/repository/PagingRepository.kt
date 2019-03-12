@@ -6,6 +6,7 @@ import com.flores.paging_sample_android.data.local.entity.Movie
 import com.flores.paging_sample_android.ioThread
 
 class PagingRepository(private val movieDao: MovieDao) {
+
     fun allMovies(): DataSource.Factory<Int, Movie> {
         return movieDao.allMovies()
     }

@@ -11,7 +11,7 @@ class PagingViewModel(pagingRepository: PagingRepository) : ViewModel() {
 
     private val pagedListConfig = PagedList.Config.Builder()
         .setEnablePlaceholders(true)
-        .setInitialLoadSizeHint(10)
+        .setInitialLoadSizeHint(30)
         .setPageSize(10)
         .build()
 
