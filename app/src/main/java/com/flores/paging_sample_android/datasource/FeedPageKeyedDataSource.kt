@@ -2,7 +2,7 @@ package com.flores.paging_sample_android.datasource
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PageKeyedDataSource
-import com.flores.paging_sample_android.data.local.entity.Movie
+import com.flores.paging_sample_android.model.Movie
 
 class FeedPageKeyedDataSource: PageKeyedDataSource<Int, Movie>() {
 
