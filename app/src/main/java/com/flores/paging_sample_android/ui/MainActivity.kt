@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showData(movieList: PagedList<Movie>) {
-        movieAdapter.submitList(movieList)
+        //movieAdapter.submitList(movieList)
     }
 
 
