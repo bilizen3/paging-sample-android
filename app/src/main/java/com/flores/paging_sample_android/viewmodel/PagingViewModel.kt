@@ -18,8 +18,8 @@ class PagingViewModel : ViewModel() {
 
     private val pagedListConfig = PagedList.Config.Builder()
         .setEnablePlaceholders(true)
-        .setInitialLoadSizeHint(30)
-        .setPageSize(10)
+        .setInitialLoadSizeHint(20)
+        .setPageSize(20)
         .build()
 
     init {
@@ -29,7 +29,8 @@ class PagingViewModel : ViewModel() {
                 dataSource.getNetworkState()
             }
         itemLiveData =
-            (LivePagedListBuilder(feedDataSource, pagedListConfig)).setFetchExecutor(Executors.newFixedThreadPool(5))
+            (LivePagedListBuilder(feedDataSource, pagedListConfig)).
+                setFetchExecutor(Executors.newFixedThreadPool(5))
                 .build()
     }
 

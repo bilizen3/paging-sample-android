@@ -34,6 +34,14 @@ class MovieAdapter : PagedListAdapter<ResultsItem, RecyclerView.ViewHolder>(diff
         }
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return if (hasExtraRow() && position == itemCount - 1) {
+            TYPE_PROGRESS
+        } else {
+            TYPE_ITEM
+        }
+    }
+
     private fun hasExtraRow(): Boolean {
         return (networkState != null && networkState!!.status != Status.SUCCESS)
     }
@@ -64,7 +72,7 @@ class MovieAdapter : PagedListAdapter<ResultsItem, RecyclerView.ViewHolder>(diff
 
     inner class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(networkState: NetworkState) {
-            if (networkState.status == Status.RUNNING) {
+            if (networkState != null && networkState.status == Status.RUNNING) {
                 itemView.pbLoading.visibility = View.VISIBLE
             } else {
                 itemView.pbLoading.visibility = View.GONE

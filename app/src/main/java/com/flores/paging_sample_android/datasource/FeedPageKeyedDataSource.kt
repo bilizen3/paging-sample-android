@@ -1,5 +1,6 @@
 package com.flores.paging_sample_android.datasource
 
+import android.util.Log
 import androidx.paging.PageKeyedDataSource
 import com.flores.paging_sample_android.data.model.ResultsItem
 import com.flores.paging_sample_android.data.model.SearchResultResponse
@@ -28,7 +29,8 @@ class FeedPageKeyedDataSource : PageKeyedDataSource<Int, ResultsItem>() {
             .enqueue(object : Callback<SearchResultResponse> {
                 override fun onResponse(call: Call<SearchResultResponse>, response: Response<SearchResultResponse>) {
                     if (response.isSuccessful) {
-                        callback.onResult(response.body()!!.results!!, null, 21)
+                        callback.onResult(response.body()!!.results!!, null, 2)
+                        Log.i("aaa","2")
                         initialLoading.postValue(NetworkState(Status.SUCCESS))
                         networkState.postValue(NetworkState(Status.SUCCESS))
 
@@ -52,6 +54,7 @@ class FeedPageKeyedDataSource : PageKeyedDataSource<Int, ResultsItem>() {
             override fun onResponse(call: Call<SearchResultResponse>, response: Response<SearchResultResponse>) {
                 if (response.isSuccessful) {
                     val nextKey = if (params.key == response.body()!!.totalResults) null else params.key + 1
+                    Log.i("aaa",nextKey.toString())
                     callback.onResult(response.body()!!.results!!, nextKey)
                     networkState.postValue(NetworkState(Status.SUCCESS))
 
