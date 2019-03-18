@@ -16,8 +16,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var database: DataBase
-    private lateinit var pagingRepository: PagingRepository
+    //private lateinit var database: DataBase
+    //private lateinit var pagingRepository: PagingRepository
     private lateinit var pagingViewModel: PagingViewModel
     private var movieAdapter = MovieAdapter()
 
@@ -28,16 +28,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        database = DataBase.getInstance(applicationContext)
-        pagingRepository = PagingRepository(database.movieDao())
-        pagingViewModel = PagingViewModel(pagingRepository)
-        insertData()
+       // database = DataBase.getInstance(applicationContext)
+       // pagingRepository = PagingRepository(database.movieDao())
+        pagingViewModel = PagingViewModel()
+        //insertData()
         rvMovie.layoutManager = LinearLayoutManager(applicationContext)
         rvMovie.adapter = movieAdapter
-
-        pagingViewModel.concertList.observe(this, Observer { movieList ->
-            showData(movieList)
+        pagingViewModel.getItemLiveData().observe(this, Observer { movieList ->
+            movieAdapter.submitList(movieList)
         })
+        pagingViewModel.getNetworkState().observe(this, Observer { networkStatus->
+            movieAdapter.setNetworkState(networkStatus)
+        })
+
     }
 
     private fun insertData() {
@@ -45,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         for (index in 1..100) {
             movies.add(Movie(title = "nuevo$index"))
         }
-        pagingRepository.insertMovie(movies)
+//        pagingRepository.insertMovie(movies)
     }
 
     private fun showData(movieList: PagedList<Movie>) {
