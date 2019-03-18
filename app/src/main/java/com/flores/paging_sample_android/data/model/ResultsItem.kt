@@ -1,4 +1,4 @@
-package com.flores.paging_sample_android.model
+package com.flores.paging_sample_android.data.model
 
 data class ResultsItem(val overview: String = "",
                        val originalLanguage: String = "",

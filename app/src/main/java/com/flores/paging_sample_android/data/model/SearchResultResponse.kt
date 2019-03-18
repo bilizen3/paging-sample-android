@@ -1,4 +1,4 @@
-package com.flores.paging_sample_android.data.Model
+package com.flores.paging_sample_android.data.model
 
 data class SearchResultResponse(val page: Int = 0,
                                 val totalPages: Int = 0,
