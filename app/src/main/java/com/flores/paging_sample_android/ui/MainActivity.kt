@@ -9,6 +9,7 @@ import com.flores.paging_sample_android.R
 import com.flores.paging_sample_android.adapter.MovieAdapter
 import com.flores.paging_sample_android.data.local.DataBase
 import com.flores.paging_sample_android.data.local.entity.Movie
+import com.flores.paging_sample_android.data.remoto.api.RetrofitClient
 import com.flores.paging_sample_android.repository.PagingRepository
 import com.flores.paging_sample_android.viewmodel.PagingViewModel
 import kotlinx.android.synthetic.main.activity_main.*

@@ -1,4 +1,4 @@
-package com.flores.paging_sample_android
+package com.flores.paging_sample_android.utils
 
 import java.util.concurrent.Executors
 
