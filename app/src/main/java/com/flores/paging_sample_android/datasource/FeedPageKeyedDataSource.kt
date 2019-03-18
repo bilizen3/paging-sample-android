@@ -49,7 +49,7 @@ class FeedPageKeyedDataSource : PageKeyedDataSource<Int, ResultsItem>() {
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, ResultsItem>) {
-        networkState.postValue(NetworkState(Status.RUNNING, "cargando"))
+        networkState.postValue(NetworkState(Status.RUNNING))
         RetrofitClient.retrofit.fetchFeed(params.key, API_KEY).enqueue(object : Callback<SearchResultResponse> {
             override fun onResponse(call: Call<SearchResultResponse>, response: Response<SearchResultResponse>) {
                 if (response.isSuccessful) {
