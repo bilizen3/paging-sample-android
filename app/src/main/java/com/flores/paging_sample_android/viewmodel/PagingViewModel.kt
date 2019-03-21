@@ -1,16 +1,11 @@
 package com.flores.paging_sample_android.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.flores.paging_sample_android.data.model.ResultsItem
 import com.flores.paging_sample_android.datasource.FeedDataSource
-import com.flores.paging_sample_android.datasource.FeedPageKeyedDataSource
-import com.flores.paging_sample_android.utils.NetworkState
-import java.security.Key
 import java.util.concurrent.Executors
 
 class PagingViewModel : ViewModel() {
@@ -22,22 +17,22 @@ class PagingViewModel : ViewModel() {
         .setPageSize(20)
         .build()
 
+    var dataSource = MutableLiveData<FeedDataSource>()
 
-    var searchLiveData= MutableLiveData<LivePagedListBuilder<*,*>>()
 
-    private var itemLiveData= Transformations
-        .switchMap(searchLiveData){
-                it->search()
-    }
+    private var itemLiveData = Transformations
+        .switchMap(dataSource) { it ->
+            search(it)
+        }
 
     fun getItemLiveData() = itemLiveData
 
 
-    private fun search()= (LivePagedListBuilder(FeedDataSource(), pagedListConfig)).
-            setFetchExecutor(Executors.newFixedThreadPool(3))
+    private fun search(feedDataSource: FeedDataSource) =
+        (LivePagedListBuilder(feedDataSource, pagedListConfig)).setFetchExecutor(Executors.newFixedThreadPool(3))
             .build()
 
     fun searchRepo(queryString: String) {
-        searchLiveData.postValue(LivePagedListBuilder(FeedDataSource(), pagedListConfig))
+        dataSource.postValue(FeedDataSource())
     }
 }

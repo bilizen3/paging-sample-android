@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         rvMovie.adapter = movieAdapter
         pagingViewModel.getItemLiveData().observe(this, Observer { movieList ->
                 movieAdapter.submitList(movieList)
-
         })
 
 
