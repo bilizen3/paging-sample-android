@@ -23,11 +23,6 @@ class PagingViewModel : ViewModel() {
 
     var livedataSourceThis= MutableLiveData<FeedDataSource>()
 
-    /*var countTotal= Transformations.switchMap(
-        dataSourceThis.getfeedPageKeyedDataSource()){
-        it.getNetworkState()
-    }*/
-
     var countTotal2= Transformations.switchMap(
         livedataSourceThis){
         it.getfeedPageKeyedDataSource()
