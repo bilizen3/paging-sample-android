@@ -1,6 +1,5 @@
 package com.flores.paging_sample_android.datasource
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.flores.paging_sample_android.data.model.ResultsItem
@@ -19,5 +18,4 @@ class FeedDataSource : DataSource.Factory<Int, ResultsItem>() {
     fun getfeedPageKeyedDataSource():  MutableLiveData<FeedPageKeyedDataSource> {
         return notesLiveData
     }
-
 }

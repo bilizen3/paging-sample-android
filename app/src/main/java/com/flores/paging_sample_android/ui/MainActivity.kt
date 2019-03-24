@@ -18,18 +18,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         init()
         btnSearch.setOnClickListener {
-            pagingViewModel.searchRepo("")
+            //movieAdapter.submitList(null)
+            pagingViewModel.searchNew()
         }
     }
 
     private fun init() {
         pagingViewModel = PagingViewModel()
         rvMovie.adapter = movieAdapter
-        pagingViewModel.itemLiveData.observe(this, Observer { movieList ->
+        pagingViewModel.countTotal4.observe(this, Observer { movieList ->
             movieAdapter.submitList(movieList)
         })
 
-        pagingViewModel.countTotal.observe(this, Observer {
+        pagingViewModel.countTotal3.observe(this, Observer {
             tvTotal.text = it.toString()
         })
     }

@@ -21,24 +21,35 @@ class PagingViewModel : ViewModel() {
 
     var dataSourceThis = FeedDataSource()
 
-    var dataSource = MutableLiveData<FeedDataSource>()
+    var livedataSourceThis= MutableLiveData<FeedDataSource>()
 
-    var countTotal= Transformations.switchMap(
+    /*var countTotal= Transformations.switchMap(
         dataSourceThis.getfeedPageKeyedDataSource()){
+        it.getNetworkState()
+    }*/
+
+    var countTotal2= Transformations.switchMap(
+        livedataSourceThis){
+        it.getfeedPageKeyedDataSource()
+    }
+    var countTotal3= Transformations.switchMap(
+        countTotal2){
         it.getNetworkState()
     }
 
-    val itemLiveData = search()
-
-    private fun search(): LiveData<PagedList<ResultsItem>> {
-        return (LivePagedListBuilder(dataSourceThis, pagedListConfig))
-            .setFetchExecutor(Executors.newFixedThreadPool(3))
-            .build()
+    var countTotal4= Transformations.switchMap(
+        livedataSourceThis){
+        search(it)
     }
 
-    fun searchRepo(queryString: String) {
-        this.dataSourceThis=FeedDataSource()
-        dataSource.postValue(dataSourceThis)
+    fun searchNew(){
+        livedataSourceThis.postValue(dataSourceThis)
+    }
+
+    fun search(feedDataSource: FeedDataSource): LiveData<PagedList<ResultsItem>> {
+        return (LivePagedListBuilder(feedDataSource, pagedListConfig))
+            .setFetchExecutor(Executors.newFixedThreadPool(3))
+            .build()
     }
 
 }
