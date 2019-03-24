@@ -1,5 +1,6 @@
 package com.flores.paging_sample_android.datasource
 
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.flores.paging_sample_android.data.model.ResultsItem
 import com.flores.paging_sample_android.data.model.SearchResultResponse
@@ -12,6 +13,11 @@ import retrofit2.Response
 class FeedPageKeyedDataSource : PageKeyedDataSource<Int, ResultsItem>() {
 
 
+    val mutableCountTotal = MutableLiveData<Int>()
+    fun getNetworkState(): MutableLiveData<Int> {
+        return mutableCountTotal
+    }
+
     override fun loadInitial(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, ResultsItem>
@@ -22,7 +28,7 @@ class FeedPageKeyedDataSource : PageKeyedDataSource<Int, ResultsItem>() {
                 override fun onResponse(call: Call<SearchResultResponse>, response: Response<SearchResultResponse>) {
                     if (response.isSuccessful) {
                         callback.onResult(response.body()!!.results!!, null, 2)
-
+                        mutableCountTotal.postValue(30)
                     } else {
                     }
                 }
@@ -40,6 +46,7 @@ class FeedPageKeyedDataSource : PageKeyedDataSource<Int, ResultsItem>() {
                 if (response.isSuccessful) {
                     val nextKey = if (params.key == response.body()!!.totalResults) null else params.key + 1
                     callback.onResult(response.body()!!.results!!, nextKey)
+                    mutableCountTotal.postValue(30)
 
                 } else {
                 }

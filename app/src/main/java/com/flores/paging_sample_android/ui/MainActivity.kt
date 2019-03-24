@@ -25,11 +25,13 @@ class MainActivity : AppCompatActivity() {
     private fun init() {
         pagingViewModel = PagingViewModel()
         rvMovie.adapter = movieAdapter
-        pagingViewModel.getItemLiveData().observe(this, Observer { movieList ->
-                movieAdapter.submitList(movieList)
+        pagingViewModel.itemLiveData.observe(this, Observer { movieList ->
+            movieAdapter.submitList(movieList)
         })
 
-
+        pagingViewModel.countTotal.observe(this, Observer {
+            tvTotal.text = it.toString()
+        })
     }
 
 

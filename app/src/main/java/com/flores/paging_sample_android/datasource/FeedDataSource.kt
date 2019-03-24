@@ -1,5 +1,6 @@
 package com.flores.paging_sample_android.datasource
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.flores.paging_sample_android.data.model.ResultsItem
@@ -7,7 +8,7 @@ import com.flores.paging_sample_android.data.model.ResultsItem
 class FeedDataSource : DataSource.Factory<Int, ResultsItem>() {
 
     private val notesLiveData = MutableLiveData<FeedPageKeyedDataSource>()
-    private lateinit var feedPageKeyedDataSource: FeedPageKeyedDataSource
+    private var feedPageKeyedDataSource= FeedPageKeyedDataSource()
 
     override fun create(): DataSource<Int, ResultsItem> {
         feedPageKeyedDataSource = FeedPageKeyedDataSource()
@@ -15,8 +16,7 @@ class FeedDataSource : DataSource.Factory<Int, ResultsItem>() {
         return feedPageKeyedDataSource
     }
 
-
-    fun getMutableLiveData(): MutableLiveData<FeedPageKeyedDataSource> {
+    fun getfeedPageKeyedDataSource():  MutableLiveData<FeedPageKeyedDataSource> {
         return notesLiveData
     }
 
