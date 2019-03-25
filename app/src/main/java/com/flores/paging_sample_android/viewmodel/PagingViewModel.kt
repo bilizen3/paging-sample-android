@@ -4,47 +4,34 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.flores.paging_sample_android.data.model.ResultsItem
-import com.flores.paging_sample_android.datasource.FeedDataSource
-import java.util.concurrent.Executors
+import com.flores.paging_sample_android.repository.PagingRepository
+import com.flores.paging_sample_android.repository.SearchResult
 
-class PagingViewModel : ViewModel() {
+class PagingViewModel(
+    val repository: PagingRepository
+) : ViewModel() {
 
-    private val pagedListConfig = PagedList.Config.Builder()
-        .setEnablePlaceholders(true)
-        .setInitialLoadSizeHint(20)
-        .setPageSize(20)
-        .build()
+    val searchtext = MutableLiveData<String>()
 
+    var searchTotalLiveData: LiveData<SearchResult> =
+        Transformations.map(searchtext) {
+            repository.searchTotal(it)
+        }
 
-    var dataSourceThis = FeedDataSource()
+    var resultCountTotal: LiveData<Int> =
+        Transformations.switchMap(searchTotalLiveData) {
+            it.countTotal
+        }
 
-    var livedataSourceThis= MutableLiveData<FeedDataSource>()
+    var resultItems: LiveData<PagedList<ResultsItem>> =
+        Transformations.switchMap(searchTotalLiveData) {
+            it.results
+        }
 
-    var countTotal2= Transformations.switchMap(
-        livedataSourceThis){
-        it.getfeedPageKeyedDataSource()
-    }
-    var countTotal3= Transformations.switchMap(
-        countTotal2){
-        it.getNetworkState()
-    }
-
-    var countTotal4= Transformations.switchMap(
-        livedataSourceThis){
-        search(it)
-    }
-
-    fun searchNew(){
-        livedataSourceThis.postValue(dataSourceThis)
-    }
-
-    fun search(feedDataSource: FeedDataSource): LiveData<PagedList<ResultsItem>> {
-        return (LivePagedListBuilder(feedDataSource, pagedListConfig))
-            .setFetchExecutor(Executors.newFixedThreadPool(3))
-            .build()
+    fun searchMovie(text: String) {
+        searchtext.postValue(text)
     }
 
 }
