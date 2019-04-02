@@ -27,10 +27,10 @@ class MovieAdapter : PagedListAdapter<ResultsItem, RecyclerView.ViewHolder>(diff
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if(holder is ItemViewHolder){
+        if (holder is ItemViewHolder) {
             holder.bind(getItem(position)!!)
-        }else{
-            (holder as LoadingViewHolder ).bind(networkState!!)
+        } else {
+            (holder as LoadingViewHolder).bind(networkState!!)
         }
     }
 
@@ -62,11 +62,10 @@ class MovieAdapter : PagedListAdapter<ResultsItem, RecyclerView.ViewHolder>(diff
         }
     }
 
-
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(resultsItem: ResultsItem) {
             itemView.movieId.text = resultsItem.id.toString()
-            itemView.movieName.text= resultsItem.title
+            itemView.movieName.text = resultsItem.title
         }
     }
 
