@@ -8,26 +8,32 @@ import androidx.paging.PagedList
 import com.flores.paging_sample_android.data.model.ResultsItem
 import com.flores.paging_sample_android.repository.PagingRepository
 import com.flores.paging_sample_android.repository.SearchResult
+import com.flores.paging_sample_android.utils.Status
 
 class PagingViewModel(
-    val repository: PagingRepository
+    private val repository: PagingRepository
 ) : ViewModel() {
 
-    val searchtext = MutableLiveData<String>()
+    private val searchtext = MutableLiveData<String>()
 
-    var searchTotalLiveData: LiveData<SearchResult> =
+    private var searchTotalLiveData: LiveData<SearchResult> =
         Transformations.map(searchtext) {
             repository.searchTotal(it)
         }
 
-    var resultCountTotal: LiveData<Int> =
+    val resultCountTotal: LiveData<Int> =
         Transformations.switchMap(searchTotalLiveData) {
             it.countTotal
         }
 
-    var resultItems: LiveData<PagedList<ResultsItem>> =
+    val resultItems: LiveData<PagedList<ResultsItem>> =
         Transformations.switchMap(searchTotalLiveData) {
             it.results
+        }
+
+    val status: LiveData<Status> =
+        Transformations.switchMap(searchTotalLiveData) {
+            it.status
         }
 
     fun searchMovie(text: String) {

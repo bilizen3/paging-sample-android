@@ -26,7 +26,10 @@ class PagingRepository {
             it.getNetworkState()
         }
 
-        return SearchResult(listitem, feedPageKeyedDataSource)
+        val statusMutableLiveData = Transformations.switchMap(feedDataSource.getfeedPageKeyedDataSource()) {
+            it.getStatusMutable()
+        }
+        return SearchResult(listitem, feedPageKeyedDataSource,statusMutableLiveData)
     }
 
 }

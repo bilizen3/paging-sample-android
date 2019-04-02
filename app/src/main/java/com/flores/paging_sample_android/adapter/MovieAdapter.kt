@@ -72,7 +72,7 @@ class MovieAdapter : PagedListAdapter<ResultsItem, RecyclerView.ViewHolder>(diff
 
     inner class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(networkState: NetworkState) {
-            if (networkState != null && networkState.status == Status.RUNNING) {
+            if (networkState != null && networkState.status == Status.LOADING) {
                 itemView.pbLoading.visibility = View.VISIBLE
             } else {
                 itemView.pbLoading.visibility = View.GONE
