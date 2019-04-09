@@ -29,7 +29,7 @@ class PagingRepository {
         val statusMutableLiveData = Transformations.switchMap(feedDataSource.getfeedPageKeyedDataSource()) {
             it.getStatusMutable()
         }
-        return SearchResult(listitem, feedPageKeyedDataSource,statusMutableLiveData)
+        return SearchResult(listitem, feedPageKeyedDataSource, statusMutableLiveData)
     }
 
 }

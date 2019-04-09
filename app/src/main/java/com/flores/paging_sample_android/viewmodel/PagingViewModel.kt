@@ -1,4 +1,5 @@
 package com.flores.paging_sample_android.viewmodel
+
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
@@ -28,7 +29,7 @@ class PagingViewModel(
     }
 
     fun searchMovie(text: String) {
-        searchtext.postValue(text)
+        searchtext.value = text
     }
 
 }
